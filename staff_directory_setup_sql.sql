@@ -143,7 +143,7 @@ INSERT INTO schedules VALUES
 (33, 3, 153, 6, 5),
 (34, 4, 153, 6, 9),
 (35, 5, 153, 6, 7),
-(36, 1, 153, 6, 9);
+(36, 6, 153, 6, 9);
 
 INSERT INTO department_membership VALUES
 (1, 1, 7),
