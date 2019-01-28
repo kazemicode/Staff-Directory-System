@@ -40,14 +40,13 @@ if add is True:
 	cursorb = cnx.cursor()
 	cursorb.execute(insert_sql, (first, last))
 	#visit_number = row[0] + 1				
-	print('Click')
-	#<a href="http://127.0.0.1:8000/Staff_db.html" target="_self">here</a>
+	print('Click <a href="http://127.0.0.1:8000/Staff_db.html" target="_self">here</a>')
 		
 if view_sd is True:	
- 
+	
 	# must be first visit, insert row
-	cursorb = cnx.cursor()
-	cursorb.execute(qsql)	
+	#cursorb = cnx.cursor()
+	#cursorb.execute(qsql)	
 	#print('Thank you for registering.  Come visit again.')
 
 	# 
