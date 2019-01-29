@@ -27,6 +27,7 @@ department = form['department'].value
 
 
 
+
 qsql = 'SELECT last_name, first_name, period, course_title, room_number\
                     FROM staff s\
                     JOIN schedules sch\
@@ -55,7 +56,8 @@ nofirst_query = 'SELECT last_name, first_name, period, course_title, room_number
                     JOIN courses c\
                         ON sch.course_id = c.course_id\
                     WHERE last_name = %s\
-                    AND (department_id = %s OR department_id = 11)'
+                    AND (department_id = %s OR department_id = 11)\
+                    ORDER BY last_name, first_name, period'
 
 
 nofirst_ordept_query = 'SELECT last_name, first_name, period, course_title, room_number\
@@ -65,7 +67,7 @@ nofirst_ordept_query = 'SELECT last_name, first_name, period, course_title, room
                     JOIN courses c\
                         ON sch.course_id = c.course_id\
                     WHERE last_name = %s\
-                    ORDER BY department_id, last_name, first_name, period'
+                    ORDER BY last_name, first_name, period'
 
 # connect to database
 cnx = mysql.connector.connect(user='root',
@@ -80,27 +82,36 @@ print("Content-Type: text/html")  # HTML is following
 print()  # blank line required, end of headers
 print("<html><head><style> table, th, td { border: 1px solid black; padding: 15px;} </style></head><body>")
 
-if first_name != None and last_name != None and department != 0:
+if first_name != None and last_name != None and department != "0":
+    #print('all fields filled')
     cursor.execute(qsql, (last_name, first_name, department))
     rows = cursor.fetchall()  # fetches the result of the SELECT clause
 
 
-elif last_name != None and department != 0:
-    cursor.execute(nofirst_query, (last_name, department))
-    rows = cursor.fetchall()  # fetches the result of the SELECT clause
-
-
-elif department != 0:
+elif department != "0" and first_name == None and last_name == None:
+    #print('only dept')
     cursor.execute(dept_query, (department, ))
     rows = cursor.fetchall()  # fetches the result of the SELECT clause
 
-else:
-    cursor.execute(nofirst_ordept_query, (department, ))
+elif first_name == None and department == "0" and last_name != None:
+    #print('just last name')
+    cursor.execute(nofirst_ordept_query, (last_name, ))
     rows = cursor.fetchall()  # fetches the result of the SELECT clause
+
+elif last_name != None and department != "0":
+    #print('no first name')
+    cursor.execute(nofirst_query, (last_name, department))
+    rows = cursor.fetchall()  # fetches the result of the SELECT clause
+
+else:
+    print("<html><head><meta http-equiv=\"Refresh\" content=\"7; url=/staff.html\"/></head>")
+    print("<body><p>Please supply a last name or department. <a href=\"/staff.html\">Return to search</a> </p></body></html>")
+    sys.exit()
+
 
 if len(rows) == 0:
     print("<html><head><meta http-equiv=\"Refresh\" content=\"7; url=/staff.html\"/></head>")
-    print("<body><p>No results found.. <a href=\"/staff.html\">Return to search</a> </p></body></html>")
+    print("<body><p>No results found. <a href=\"/staff.html\">Return to search</a> </p></body></html>")
     sys.exit()
 else:
     print("<table><tr><th>Last Name</th><th>First Name</th><th>Period</th><th>Course Title</th>\

@@ -109,9 +109,9 @@ INSERT INTO courses VALUES
 INSERT INTO schedules VALUES
 -- schedule_id, period, room_number, staff_id, course_id)
 (1, 1, 902, 1, 1),
-(2, 2, 902, 1, 4),
+(2, 2, 902, 1, 2),
 (3, 3, 902, 1, 1),
-(4, 4, 902, 1, 4),
+(4, 4, 902, 1, 2),
 (5, 5, 902, 1, 5),
 (6, 6, 902, 1, 1),
 (7, 1, 301, 2, 5),
