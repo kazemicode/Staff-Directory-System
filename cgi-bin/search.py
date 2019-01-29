@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Sara Kazemi
 # CST 363
-# Homework 1 Part 2
+# Project 1 Part 1
 
 
 
