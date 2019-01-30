@@ -1,4 +1,8 @@
-# login.py
+#!/usr/bin/env python3
+# Ryan Dorrity
+# CST 363
+# Project 1 Part 1
+
 # this file must be in the /cgi-bin/ directory of the server
 import cgitb , cgi
 import mysql.connector
@@ -16,10 +20,10 @@ if "add" in form:
 print("Content-Type: text/html")    # HTML is following
 print()                             # blank line required, end of headers
 print("<html><body>")
-print("<p>", first, last, "was added to the database.</p><br>")
-qsql = 'SELECT * FROM staff'  
+print("<p>", first, last, "was added to the database.</p><br>")  
 insert_sql = 'INSERT INTO staff (first_name, last_name) VALUES (%s, %s)'
-update_sql = 'UPDATE login SET visits = visits + 1 WHERE first=%s and last=%s'
+
+
 
 # connect to database
 cnx = mysql.connector.connect(user='root',
@@ -29,14 +33,14 @@ cnx = mysql.connector.connect(user='root',
 
  
 #  code to do SQL goes here
-#cursor = cnx.cursor()
+cursor = cnx.cursor()
 #cursor.execute(qsql, (first, last))
 #row = cursor.fetchone()
 
 
 if add is True:	
-	cursorb = cnx.cursor()
-	cursorb.execute(insert_sql, (first, last))
+	cursor = cnx.cursor()
+	cursor.execute(insert_sql, (first, last))
 	#visit_number = row[0] + 1				
 	print('Click <a href="http://127.0.0.1:8000/Staff_db.html" target="_self">here</a> to return to the Staff Database Management System.')
 
