@@ -9,11 +9,9 @@ form = cgi.FieldStorage()
 #
 first = form['first'].value 
 last = form['last'].value
-view_sd = False
 add = False
-if "view_sd" in form:
-    view_sd=True 
-elif "add" in form:
+
+if "add" in form:
     add=True 
 print("Content-Type: text/html")    # HTML is following
 print()                             # blank line required, end of headers
@@ -25,7 +23,7 @@ update_sql = 'UPDATE login SET visits = visits + 1 WHERE first=%s and last=%s'
 
 # connect to database
 cnx = mysql.connector.connect(user='root',
-                                password='sesame',
+                                password='sesame', # Chibi2019! -- other server password for team member
                                 database='sd',
                                 host='127.0.0.1')
 
@@ -40,17 +38,8 @@ if add is True:
 	cursorb = cnx.cursor()
 	cursorb.execute(insert_sql, (first, last))
 	#visit_number = row[0] + 1				
-	print('Click <a href="http://127.0.0.1:8000/Staff_db.html" target="_self">here</a>')
-		
-if view_sd is True:	
-	
-	# must be first visit, insert row
-	#cursorb = cnx.cursor()
-	#cursorb.execute(qsql)	
-	#print('Thank you for registering.  Come visit again.')
+	print('Click <a href="http://127.0.0.1:8000/Staff_db.html" target="_self">here</a> to return to the Staff Database Management System.')
 
-	# 
-	#print('first already taken. Please select a new userid.')
 print("</body></html>")
 cnx.commit()
 cnx.close()  # close the connection 
