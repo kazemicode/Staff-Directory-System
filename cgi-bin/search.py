@@ -27,8 +27,6 @@ else:
 department = form['department'].value # get the value assigned to the department attribute in the field
 
 
-
-
 # This query is triggered if all fields are filled out
 qsql = 'SELECT last_name, first_name, period, course_title, room_number\
                     FROM staff s\
