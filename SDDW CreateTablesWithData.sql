@@ -24,34 +24,26 @@ create table course (
 );
 
 
+
 create table course_schedule (
 
-		period		int			not null,
 
 		staff_id	int			not null,
 
 		course_id	int			not null,
         
-        period 		int 		not null,
+        period		int			not null,
         
         room 		varchar(5) 	not null,
 
-		total_courses			numeric(5),
 
 
-
-	constraint course_schedule_pk primary key (period, staff_id, course_id),
+	constraint course_schedule_pk primary key (staff_id, course_id, period),
 
 
  
 	constraint staff_fk foreign key(staff_id) references staff(staff_id) 
 	
-	on delete no action on update no action,
-
-
-
-	constraint period_fk foreign key(period) references period(period) 
-		
 	on delete no action on update no action,
 
 
