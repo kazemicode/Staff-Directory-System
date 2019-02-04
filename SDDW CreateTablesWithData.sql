@@ -55,6 +55,16 @@ create table course_schedule (
 
 );
 
+/* load the sddw staff table from sd staff */
+
+insert into sddw.staff 
+
+(staff_id, staff_name)
+ 
+select staff_id, concat( trim(last_name), ', ', trim(first_name))
+
+from sd.staff;
+
 
 
 
