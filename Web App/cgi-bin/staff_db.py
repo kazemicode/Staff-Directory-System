@@ -27,7 +27,7 @@ insert_sql = 'INSERT INTO staff (first_name, last_name) VALUES (%s, %s)'
 
 # connect to database
 cnx = mysql.connector.connect(user='root',
-                                password='sesame', # Chibi2019! -- other server password for team member
+                                password='Chibi2019!', # Chibi2019! -- other server password for team member
                                 database='sd',
                                 host='127.0.0.1')
 

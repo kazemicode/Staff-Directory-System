@@ -72,7 +72,7 @@ nofirst_ordept_query = 'SELECT last_name, first_name, period, course_title, room
 
 # connect to database
 cnx = mysql.connector.connect(user='root',
-                                password='sesame',
+                                password='Chibi2019!',
                                 database='sd',
                                 host='127.0.0.1')
 
