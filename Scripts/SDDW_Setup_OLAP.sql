@@ -19,7 +19,7 @@ create table staff(
 
 create table course (
 	course_id		int			not null 	auto_increment 	primary key,
-	course_title		varchar(60)	not null,
+	course_title	varchar(60)	not null,
 	department 		varchar(50)	not null
 );
 
@@ -64,6 +64,21 @@ insert into sddw.staff
 select staff_id, concat( trim(last_name), ', ', trim(first_name))
 
 from sd.staff;
+
+
+/* load the sddw course table from sd courses */
+insert into sddw.course 
+(course_id, course_title, department)
+select course_id, course_id, department_name
+from sd.courses c JOIN
+sd.departments d
+WHERE c.department_id = d.department_id;
+
+/* load the sddw course_schedules table from sd courses and sd schedules */
+insert into sddw.course_schedule 
+(staff_id, course_id, period, room)
+select staff_id, course_id, period, room_number
+from sd.schedules;
 
 
 
