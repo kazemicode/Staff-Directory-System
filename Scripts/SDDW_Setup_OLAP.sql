@@ -19,7 +19,7 @@ create table staff(
 
 create table course (
 	course_id		int			not null 	auto_increment 	primary key,
-	course_name		varchar(60)	not null,
+	course_title		varchar(60)	not null,
 	department 		varchar(50)	not null
 );
 
@@ -146,5 +146,6 @@ WHERE staff_id IN
 	)
 );
 SELECT * FROM fifth_prep;
+
 
 
