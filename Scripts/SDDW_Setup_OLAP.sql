@@ -163,4 +163,29 @@ WHERE staff_id IN
 SELECT * FROM fifth_prep;
 
 
+/* How many preps (distinct courses) does each teacher have? */
+SELECT staff_name AS "Staff Name", COUNT(DISTINCT course_id) AS num_preps
+FROM course_schedule cs
+JOIN staff s
+ON s.staff_id = cs.staff_id
+WHERE course_id NOT IN
+(SELECT course_id
+FROM course
+WHERE course_title = "Prep")
+GROUP BY staff_name
+ORDER BY num_preps DESC;
+
+/* On average, how many preps do Sweetwater teachers have? */
+SELECT AVG(t.num_preps) AS "Average Number of Preps"
+FROM (
+	SELECT staff_name, COUNT(DISTINCT course_id) AS num_preps
+	FROM course_schedule cs
+	JOIN staff s
+	ON s.staff_id = cs.staff_id
+	WHERE course_id NOT IN
+		(SELECT course_id
+		FROM course
+		WHERE course_title = "Prep")
+        GROUP BY staff_name
+	)t;
 
