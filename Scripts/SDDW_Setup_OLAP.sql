@@ -69,7 +69,7 @@ from sd.staff;
 /* load the sddw course table from sd courses */
 insert into sddw.course 
 (course_id, course_title, department)
-select course_id, course_id, department_name
+select course_id, course_title, department_name
 from sd.courses c JOIN
 sd.departments d
 WHERE c.department_id = d.department_id;
